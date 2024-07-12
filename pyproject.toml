@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wbm-notifier"
+version = "0.1.0"
+description = "A package that monitors a webpage and provides notifications using ntfy.sh when the contents change."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+dependencies = [
+    "beautifulsoup4",
+    "requests"
+]
+
+[project.urls]
+Homepage = "https://github.com/conor-f/aider-wbm"
+Repository = "https://github.com/conor-f/aider-wbm"
+
+
+[project.optional-dependencies]
+dev = [
+    "pre-commit",
+    "pytest",
+    "types-requests"
+]
+
+[project.scripts]
+wbm-notifier = "wbm_notifier:main"

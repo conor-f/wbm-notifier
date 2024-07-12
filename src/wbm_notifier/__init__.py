@@ -1,0 +1,1 @@
+# WBM Notifier package initialization
