@@ -13,13 +13,33 @@ def main():
 
     while True:
         content = fetch_webpage(config.URL)
-        parsed_content = parse_webpage(content)
+        areas = parse_webpage(content)
 
-        previous_content = get_previous_content(config.SHELF_PATH, config.URL)
+        for entry in areas:
+            title = "New apartment available!"
 
-        if parsed_content != previous_content:
-            send_notification("Webpage content has changed!", config.TOPIC)
-            store_content(config.SHELF_PATH, config.URL, parsed_content)
+            message = f"Area: {entry['area']}\n"
+            message += f"Address: {entry['address']}\n"
+            message += f"Price: {entry['price']}\n"
+            message += f"Size: {entry['size']}\n"
+            message += f"Rooms: {entry['rooms']}\n"
+            message += f"Features: {entry['features']}\n"
+
+            link = f"https://www.wbm.de{entry['link']}"
+
+            if not get_previous_content(config.SHELF_PATH, message):
+                send_notification(
+                    title,
+                    message,
+                    link,
+                    config.TOPIC,
+                )
+
+                store_content(
+                    config.SHELF_PATH,
+                    message,
+                    True,
+                )
 
         time.sleep(config.CHECK_INTERVAL)
 
