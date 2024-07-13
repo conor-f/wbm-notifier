@@ -1,4 +1,6 @@
+import random
 import time
+
 from config.manager import Config
 from wbm_notifier.fetcher import fetch_webpage, parse_webpage
 from wbm_notifier.notifier import send_notification
@@ -11,6 +13,7 @@ def main():
     """
     config = Config()
 
+    last_notification_time = time.time()
     while True:
         content = fetch_webpage(config.URL)
         areas = parse_webpage(content)
@@ -37,11 +40,27 @@ def main():
                     config.TOPIC,
                 )
 
+                last_notification_time = time.time()
+
                 store_content(
                     config.SHELF_PATH,
                     message,
                     True,
                 )
+
+        current_time = time.time()
+        if (
+            current_time - last_notification_time
+            >= config.NO_NOTIFICATION_INTERVAL * 60
+        ) and random.random() < 0.05:
+            send_notification(
+                "No new apartments",
+                "Still running with no issues! Just nothing new found!",
+                "",
+                "",
+                config.TOPIC,
+            )
+            last_notification_time = current_time
 
         time.sleep(config.CHECK_INTERVAL)
 

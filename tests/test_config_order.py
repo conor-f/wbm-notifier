@@ -13,6 +13,7 @@ class TestConfigOrder(unittest.TestCase):
             "TOPIC": "env-topic",
             "NTFY_SERVER": "http://env-ntfy-server.com",
             "CHECK_INTERVAL": "30",
+            "NO_NOTIFICATION_INTERVAL": "30",
         },
     )
     @patch(
@@ -40,6 +41,7 @@ class TestConfigOrder(unittest.TestCase):
             "TOPIC": "config-topic",
             "NTFY_SERVER": "http://config-ntfy-server.com",
             "CHECK_INTERVAL": "20",
+            "NO_NOTIFICATION_INTERVAL": "1000",
         },
     )
     def test_argument_order(self, mock_config_read, mock_config_getitem):

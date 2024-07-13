@@ -21,6 +21,11 @@ class Config:
         parser.add_argument(
             "--check-interval", type=int, help="Interval between checks in seconds"
         )
+        parser.add_argument(
+            "--no-notification-interval",
+            type=int,
+            help="Interval in minutes to notify if no new listings are found",
+        )
         args = parser.parse_args()
 
         self.config = configparser.ConfigParser()
@@ -36,4 +41,10 @@ class Config:
         )
         self.CHECK_INTERVAL = args.check_interval or int(
             os.getenv("CHECK_INTERVAL", self.config["DEFAULT"]["CHECK_INTERVAL"])
+        )
+        self.NO_NOTIFICATION_INTERVAL = args.no_notification_interval or int(
+            os.getenv(
+                "NO_NOTIFICATION_INTERVAL",
+                self.config["DEFAULT"]["NO_NOTIFICATION_INTERVAL"],
+            )
         )
