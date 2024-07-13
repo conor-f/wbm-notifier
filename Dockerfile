@@ -10,12 +10,5 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir .
 
-# Set environment variables for configuration
-ENV URL
-ENV SHELF_PATH
-ENV TOPIC
-ENV NTFY_SERVER
-ENV CHECK_INTERVAL
-
 # Command to run the package
 CMD ["wbm-notifier"]
