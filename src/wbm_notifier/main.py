@@ -26,12 +26,14 @@ def main():
             message += f"Features: {entry['features']}\n"
 
             link = f"https://www.wbm.de{entry['link']}"
+            image_url = f"https://www.wbm.de{entry['image_url']}"
 
             if not get_previous_content(config.SHELF_PATH, message):
                 send_notification(
                     title,
                     message,
                     link,
+                    image_url,
                     config.TOPIC,
                 )
 

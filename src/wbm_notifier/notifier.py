@@ -5,7 +5,7 @@ config = Config()
 NTFY_SERVER = config.NTFY_SERVER
 
 
-def send_notification(title, message, link, topic):
+def send_notification(title, message, link, image_link, topic):
     url = f"{NTFY_SERVER}/{topic}"
     response = requests.post(
         url,
@@ -13,6 +13,9 @@ def send_notification(title, message, link, topic):
         headers={
             "Click": link,
             "Title": title,
+            "Icon": image_link,
+            "Priority": "5",
+            "Tags": "house",
         },
     )
     response.raise_for_status()

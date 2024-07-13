@@ -11,7 +11,7 @@ def fetch_webpage(url):
 def parse_webpage(content):
     soup = BeautifulSoup(content, "html.parser")
     entries = []
-    for div in soup.find_all("div", class_="textWrap"):
+    for div in soup.find_all("div", class_="openimmo-search-list-item"):
         entry = {}
         try:
             entry["area"] = div.find("div", class_="area").text.strip()
@@ -23,6 +23,9 @@ def parse_webpage(content):
                 "ul", class_="check-property-list"
             ).text.strip()
             entry["link"] = div.find("a")["href"]
+            entry["image_url"] = div.find("div", attrs={"data-img-src": True})[
+                "data-img-src"
+            ]
             entries.append(entry)
         except AttributeError:
             continue
