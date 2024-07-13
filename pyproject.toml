@@ -4,10 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wbm-notifier"
-version = "0.2.2"
+version = "0.3.0"
 description = "A package that monitors a webpage and provides notifications using ntfy.sh when the contents change."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.12"
 license = { text = "MIT" }
 dependencies = [
     "beautifulsoup4",
@@ -27,4 +27,4 @@ dev = [
 ]
 
 [project.scripts]
-wbm-notifier = "wbm_notifier:main"
+wbm-notifier = "wbm_notifier.main:main"

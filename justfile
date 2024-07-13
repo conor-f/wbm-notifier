@@ -31,8 +31,13 @@ install-editable:
     ./{{VENV_DIR}}/bin/pip install -e .
 
 # Recipe to run the wbm-notifier
-run:
-    ./{{VENV_DIR}}/bin/python -m wbm_notifier
+run: install-editable
+    ./{{VENV_DIR}}/bin/wbm-notifier
+
+# Recipe to build and run the Docker container
+docker-build-run:
+    docker build -t wbm-notifier .
+    docker run --rm wbm-notifier
 
 # Recipe to run tests
 test:
